@@ -33,8 +33,6 @@ export default function Playlist() {
                 }
                 const data = await response.json();
 
-
-
                 const tracks = data.tracks;
                 const songs = tracks.filter(item => item.artist && item.year);
                 const podcasts = tracks.filter(item => (item.episodeTitle || item.episode));
@@ -60,10 +58,7 @@ export default function Playlist() {
     }, [initialized]);
 
 
-
-
-
-
+    //SHUFFLING
     const shuffleArray = array => {
         const shuffledArray = [...array];
         for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -73,8 +68,6 @@ export default function Playlist() {
         return shuffledArray;
     };
 
-
-    //SHUFFLING
     const shuffleSongs = () => {
         const shuffledSongs = shuffleArray(songs);
         setSongs(shuffledSongs);
@@ -89,6 +82,7 @@ export default function Playlist() {
         const currentPodcastIndex = shuffledPodcasts.findIndex(podcast => podcast === currentPlayingPodcast);
         setCurrentPlayingIndexPodcast(currentPodcastIndex !== -1 ? currentPodcastIndex : 0);
     };
+
 
     //Play Next
     const playNextSong = () => {
