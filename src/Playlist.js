@@ -25,7 +25,8 @@ export default function Playlist() {
 
     //Fetching data from JSON Server
     useEffect(() => {
-        fetch('http://localhost:3000/tracks')
+        //used github to host the json
+        fetch('https://anilkumar3494.github.io/host-json/myTracks.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -33,8 +34,10 @@ export default function Playlist() {
                 return response.json();
             })
             .then(data => {
-                const songs = data.filter(item => item.artist && item.year);
-                const podcasts = data.filter(item => (item.episodeTitle || item.episode));
+                // console.log(data)
+                const tracks = data.tracks;
+                const songs = tracks.filter(item => item.artist && item.year);
+                const podcasts = tracks.filter(item => (item.episodeTitle || item.episode));
 
                 if (!initialized) {
                     const shuffledSongs = shuffleArray(songs);
@@ -53,6 +56,8 @@ export default function Playlist() {
                 console.error('There was a problem with fetching data:', error);
             });
     }, [initialized]);
+
+
 
 
 

@@ -13,7 +13,6 @@ root.render(
   <React.StrictMode>
     <div>
       <Playlist />
-
     </div>
 
   </React.StrictMode>
