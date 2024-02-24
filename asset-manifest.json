@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/AnilKumar3494/music-O-App.git/static/css/main.8d8c60c9.css",
+    "main.js": "/AnilKumar3494/music-O-App.git/static/js/main.8add0620.js",
+    "static/js/453.dcd9a741.chunk.js": "/AnilKumar3494/music-O-App.git/static/js/453.dcd9a741.chunk.js",
+    "static/media/musicbg.jpg": "/AnilKumar3494/music-O-App.git/static/media/musicbg.f4931b92f08dc7233385.jpg",
+    "index.html": "/AnilKumar3494/music-O-App.git/index.html",
+    "main.8d8c60c9.css.map": "/AnilKumar3494/music-O-App.git/static/css/main.8d8c60c9.css.map",
+    "main.8add0620.js.map": "/AnilKumar3494/music-O-App.git/static/js/main.8add0620.js.map",
+    "453.dcd9a741.chunk.js.map": "/AnilKumar3494/music-O-App.git/static/js/453.dcd9a741.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8d8c60c9.css",
+    "static/js/main.8add0620.js"
+  ]
+}
