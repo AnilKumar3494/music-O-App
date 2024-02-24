@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Fetchtest from './Fetchtest';
 
 
-import Playlist from './Playlist';
+// import Playlist from './Playlist';
 
 
 
@@ -12,7 +13,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <div>
-      <Playlist />
+      {/* <Playlist /> */}
+      <Fetchtest />
     </div>
 
   </React.StrictMode>
