@@ -1,82 +1,62 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import Song from './Song'
+import React, { useEffect, useState } from 'react';
+
+import Song from './Song';
 import Podcast from './Podcast';
-import './styles.css'
+
+import Statussong from './Statussongs';
+import Statuspodcasts from './Statuspodcasts';
+
+import './styles.css';
 
 
 export default function Playlist() {
-    const [shuffledSongs, setShuffledSongs] = useState([])
-    const [shuffledPodcasts, setShuffledPodcasts] = useState([])
+    const [songs, setSongs] = useState([]);
+    const [podcasts, setPodcasts] = useState([]);
 
-    //Songs Data and info
-    const songData = useMemo(() => {
-        //Just to show that data can be fetched and used - making it scalable if needed 
-        const artistNames = ["Avicii"]
-        return ([
+    const [currentPlayingSong, setCurrentPlayingSong] = useState(null);
+    const [currentPlayingPodcast, setCurrentPlayingPodcast] = useState(null);
 
-            {
-                songTitle: "My Way", artistName: "Frank Sinatra", year: 1969,
-                songLink: "https://www.youtube.com/embed/qQzdAsjWGPg?si=8BlxHYxR0mXgbt4n",
-                artistLink: "https://en.wikipedia.org/wiki/Frank_Sinatra"
-            },
-            {
-                songTitle: "Just the way you are", artistName: "Burno Mars", year: 'Sep 8, 2010',
-                songLink: "https://www.youtube.com/embed/LjhCEhWiKXk?si=takZmbk-0RbQEwdz",
-                artistLink: "https://en.wikipedia.org/wiki/Bruno_Mars"
-            },
+    const [currentPlayingIndexSong, setCurrentPlayingIndexSong] = useState(0); // Store the index of the current playing song
+    const [currentPlayingIndexPodcast, setCurrentPlayingIndexPodcast] = useState(0); // Store the index of the current playing podcast
 
-            {
-                songTitle: "Perfect", artistName: "Ed Sheeran", year: 'Nov 9, 2017',
-                songLink: "https://www.youtube.com/embed/2Vv-BfVoq4g?si=VyOPgKfNitXRaKqT",
-                artistLink: "https://en.wikipedia.org/wiki/Ed_Sheeran"
-            },
-            {
-                songTitle: "Waiting for Love", artistName: artistNames[0], year: '2015',
-                songLink: "https://www.youtube.com/embed/cHHLHGNpCSA?si=nR7vGe-j8q2UdceV",
-                artistLink: "https://en.wikipedia.org/wiki/Avicii"
-            }
-        ]
-        )
-    }, [])
-
-    //Podcasts Data and info
-    const introductionEpisode = {
-        season: 1,
-        episodeNumber: 1,
-        episodeName: "Introduction",
-        episodeLink: "https://embed.music.apple.com/in/album/introduction/359236365?i=359236431"
-    };
-
-    const thomasMetzingerEpisode = {
-        episodeNumber: 2,
-        episodeName: "Thomas Metzinger",
-        episodeLink: "https://embed.music.apple.com/in/album/thomas-metzinger-phd-introduces-himself/359236365?i=359236433"
-    };
-
-    const problemOfConsciousnessEpisode = {
-        season: 1,
-        episodeNumber: 3,
-        episodeName: "The Problem(s) of Consciousness",
-        episodeLink: "https://embed.music.apple.com/in/album/the-problem-s-of-consciousness/359236365?i=359236434"
-    };
-
-    const subjectiveConsciousnessEpisode = {
-        episodeNumber: 4,
-        episodeName: "Why is Consciousness Subjective",
-        episodeLink: "https://embed.music.apple.com/in/album/why-is-consciousness-subjective/359236365?i=359236415"
-    };
-
-    // Combine individual episodes into an array
-    const podcastData = useMemo(() => [
-        introductionEpisode,
-        thomasMetzingerEpisode,
-        problemOfConsciousnessEpisode,
-        subjectiveConsciousnessEpisode
-    ], []);
+    const [initialized, setInitialized] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false); // State to track play/pause
 
 
-    /*Logic used for shuffling*/
-    const shuffleArray = (array) => {
+    //Fetching data from JSON Server
+    useEffect(() => {
+        fetch('http://localhost:3000/tracks')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const songs = data.filter(item => item.artist && item.year);
+                const podcasts = data.filter(item => (item.episodeTitle || item.episode));
+
+                if (!initialized) {
+                    const shuffledSongs = shuffleArray(songs);
+                    const shuffledPodcasts = shuffleArray(podcasts);
+
+                    setSongs(shuffledSongs);
+                    setPodcasts(shuffledPodcasts);
+
+                    setInitialized(true);
+                } else {
+                    setSongs(songs);
+                    setPodcasts(podcasts);
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with fetching data:', error);
+            });
+    }, [initialized]);
+
+
+
+    const shuffleArray = array => {
         const shuffledArray = [...array];
         for (let i = shuffledArray.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -85,49 +65,123 @@ export default function Playlist() {
         return shuffledArray;
     };
 
-    //To do the shuffle only when rendered - if not for this, the shuffling keeps on hapenning!!
-    useEffect(() => {
-        const shuffledSongs = shuffleArray(songData);
-        const shuffledPodcasts = shuffleArray(podcastData);
 
-        setShuffledSongs(shuffledSongs);
-        setShuffledPodcasts(shuffledPodcasts);
-    }, [songData, podcastData]);
+    //SHUFFLING
+    const shuffleSongs = () => {
+        const shuffledSongs = shuffleArray(songs);
+        setSongs(shuffledSongs);
+        // Update currentPlayingIndex based on shuffled songs
+        const currentSongIndex = shuffledSongs.findIndex(song => song === currentPlayingSong);
+        setCurrentPlayingIndexSong(currentSongIndex !== -1 ? currentSongIndex : 0);
+    };
 
-    //Page Reloader - Shuffle
-    const redloadHandle = () => {
-        window.location.reload()
-    }
+    const shufflePodcasts = () => {
+        const shuffledPodcasts = shuffleArray(podcasts);
+        setPodcasts(shuffledPodcasts);
+        const currentPodcastIndex = shuffledPodcasts.findIndex(podcast => podcast === currentPlayingPodcast);
+        setCurrentPlayingIndexPodcast(currentPodcastIndex !== -1 ? currentPodcastIndex : 0);
+    };
 
-    //Front-end - user can see this
+    //Play Next
+    const playNextSong = () => {
+        const nextIndex = (currentPlayingIndexSong + 1) % songs.length;
+        setCurrentPlayingIndexSong(nextIndex);
+        setCurrentPlayingSong(songs[nextIndex]);
+        setIsPlaying(true);
+    };
+
+    const playNextPodcast = () => {
+        const nextIndex = (currentPlayingIndexPodcast + 1) % podcasts.length;
+        setCurrentPlayingIndexPodcast(nextIndex);
+        setCurrentPlayingPodcast(podcasts[nextIndex]);
+        setIsPlaying(true);
+    };
+
+
+    //Play Previous
+    const playPrevSong = () => {
+        const prevIndex = (currentPlayingIndexSong - 1 + songs.length) % songs.length;
+        setCurrentPlayingIndexSong(prevIndex);
+        setCurrentPlayingSong(songs[prevIndex]);
+        setIsPlaying(true);
+    };
+
+    const playPrevPodcast = () => {
+        const prevIndex = (currentPlayingIndexPodcast - 1 + podcasts.length) % podcasts.length;
+        setCurrentPlayingIndexPodcast(prevIndex);
+        setCurrentPlayingPodcast(podcasts[prevIndex]);
+        setIsPlaying(true);
+    };
+
+
+    //Play Pause
+    const playPause = () => {
+        if (currentPlayingSong === null) {
+            const randomIndex = Math.floor(Math.random() * songs.length);
+            setCurrentPlayingSong(songs[randomIndex]);
+            setCurrentPlayingIndexSong(randomIndex);
+            setIsPlaying(true);
+        } else if (!isPlaying) {
+            setIsPlaying(true);
+        } else {
+            setIsPlaying(false);
+        }
+    };
+
+    const playPausePodcast = () => {
+        if (currentPlayingPodcast === null) {
+            const randomIndex = Math.floor(Math.random() * podcasts.length);
+            setCurrentPlayingPodcast(podcasts[randomIndex]);
+            setCurrentPlayingIndexPodcast(randomIndex);
+            setIsPlaying(true);
+        } else if (!isPlaying) {
+            setIsPlaying(true);
+        } else {
+            setIsPlaying(false);
+        }
+    };
+
+
+    //Front-end
     return (
         <div>
             <div>
-                <h1>Musico - Songs & Podcasts</h1>
-                <button onClick={redloadHandle} >Give it a Whirl</button>
+                <h1>Music-O Songs & Podcasts</h1>
             </div>
 
-            <div>
-                <h2>Songs for you</h2>
-                <div className='songs_box'>
-                    {shuffledSongs.map((song, index) => (
-                        <Song key={index} {...song} />
-                    )
-                    )}
+
+            {/* Songs Section */}
+            <div className='songs_container'>
+                <h2>Curated Songs</h2>
+                <Statussong
+                    currentPlaying={currentPlayingSong}
+                    isPlaying={isPlaying}
+                    playNext={playNextSong}
+                    playPrev={playPrevSong}
+                    playPause={playPause}
+                    shuffled={shuffleSongs}
+                />
+                <div className="songs_box">
+                    <Song songsArray={songs} setCurrentPlaying={setCurrentPlayingSong} setIsPlaying={setIsPlaying} />
                 </div>
             </div>
-            <div className='podcast_section'>
-                <h2>Shuffled Podcasts for you</h2>
-                <div className='podcast_box'>
-                    {shuffledPodcasts.map((podcast, index) => (
-                        <Podcast key={index} {...podcast} />
-                    )
-                    )}
+
+
+            {/* Podcasts Sections */}
+            <div className='podcasts_container'>
+                <h2>Curated Podcasts</h2>
+                <Statuspodcasts
+                    currentPlaying={currentPlayingPodcast}
+                    isPlaying={isPlaying}
+                    playNext={playNextPodcast}
+                    playPrev={playPrevPodcast}
+                    playPause={playPausePodcast}
+                    shuffled={shufflePodcasts}
+                />
+                <div className="podcasts_box">
+                    <Podcast podcastsArray={podcasts} setCurrentPlaying={setCurrentPlayingPodcast} setIsPlaying={setIsPlaying} />
                 </div>
             </div>
         </div>
-    )
+    );
 }
-
-
-

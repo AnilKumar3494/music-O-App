@@ -8,12 +8,17 @@ body {
   color: aliceblue;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url(https://img.freepik.com/free-vector/glowing-musical-pentagram-background-with-sound-notes_1017-31220.jpg?w=1800&t=st=1706313164~exp=1706313764~hmac=7994dc3c5e4c0d6f45135c5b350be3cecb8e58d463f0e8bc5c2d70cbf6c44805);
   background-image: url(musicbg.jpg);
-  background-position: center;
+
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
 
   line-height: 1.4;
+
+  min-height: 100vh;
 }
 
 code {
