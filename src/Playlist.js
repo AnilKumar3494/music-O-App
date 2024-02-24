@@ -27,84 +27,13 @@ export default function Playlist() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // const response = await fetch('https://anilkumar3494.github.io/host-json/myTracks.json');
-                // if (!response.ok) {
-                //     throw new Error('Network response was not ok');
-                // }
-                // const data = await response.json();
-
-                const data = {
-                    "tracks": [
-                        {
-                            "title": "Billie Jean",
-                            "artist": "Michael Jackson",
-                            "year": 1983
-                        },
-                        {
-                            "title": "Smells Like Teen Spirit",
-                            "artist": "Nirvana",
-                            "year": 1991
-                        },
-                        {
-                            "artist": "Rick Astley",
-                            "year": 1987,
-                            "title": "Never Gonna Give You Up"
-                        },
-                        {
-                            "episode": 360,
-                            "episodeTitle": "Switched at Birth"
-                        },
-                        {
-                            "season": 7,
-                            "episode": 2,
-                            "episodeTitle": "How to Fail: Malcolm Gladwell"
-                        },
-                        {
-                            "episode": 5,
-                            "season": 1,
-                            "episodeTitle": "Route Talk"
-                        },
-                        {
-                            "artist": "Nathan Evans",
-                            "year": 2021,
-                            "title": "Wellerman",
-                            "genre": "Folk"
-                        },
-                        {
-                            "artist": "John D. Smith",
-                            "year": 2003,
-                            "title": "Podcasts Are Overrated"
-                        },
-                        {
-                            "podcast": "The Moth",
-                            "episodeTitle": "The Moth Presents Anthony Griffith"
-                        },
-                        {
-                            "episode": 7,
-                            "episodeTitle": "Vocational Wheel"
-                        },
-                        {
-                            "artist": "Rebecca Black",
-                            "year": 2011,
-                            "title": "Friday"
-                        },
-                        {
-                            "season": 1,
-                            "episode": 2,
-                            "episodeTitle": "John D. Smith is a Subpar Musician",
-                            "year": 2004
-                        },
-                        {
-                            "episode": 1169,
-                            "episodeTitle": "The Joe Rogan Experience- #1169: Elon Musk"
-                        },
-                        {
-                            "artist": "Taylor Swift",
-                            "year": 2023,
-                            "title": "Cruel Summer"
-                        }
-                    ]
+                const response = await fetch('https://anilkumar3494.github.io/host-json/myTracks.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+
+
 
                 const tracks = data.tracks;
                 const songs = tracks.filter(item => item.artist && item.year);
