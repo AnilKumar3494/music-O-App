@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/AnilKumar3494/music-O-App/static/css/main.bc8c17bd.css",
-    "main.js": "/AnilKumar3494/music-O-App/static/js/main.0a030aa4.js",
-    "static/js/453.dcd9a741.chunk.js": "/AnilKumar3494/music-O-App/static/js/453.dcd9a741.chunk.js",
-    "static/media/musicbg.jpg": "/AnilKumar3494/music-O-App/static/media/musicbg.f4931b92f08dc7233385.jpg",
-    "index.html": "/AnilKumar3494/music-O-App/index.html",
-    "main.bc8c17bd.css.map": "/AnilKumar3494/music-O-App/static/css/main.bc8c17bd.css.map",
-    "main.0a030aa4.js.map": "/AnilKumar3494/music-O-App/static/js/main.0a030aa4.js.map",
-    "453.dcd9a741.chunk.js.map": "/AnilKumar3494/music-O-App/static/js/453.dcd9a741.chunk.js.map"
+    "main.css": "/music-O-App/static/css/main.a4e97ec7.css",
+    "main.js": "/music-O-App/static/js/main.a4d1eb0e.js",
+    "static/js/453.dcd9a741.chunk.js": "/music-O-App/static/js/453.dcd9a741.chunk.js",
+    "static/media/musicbg.jpg": "/music-O-App/static/media/musicbg.f4931b92f08dc7233385.jpg",
+    "index.html": "/music-O-App/index.html",
+    "main.a4e97ec7.css.map": "/music-O-App/static/css/main.a4e97ec7.css.map",
+    "main.a4d1eb0e.js.map": "/music-O-App/static/js/main.a4d1eb0e.js.map",
+    "453.dcd9a741.chunk.js.map": "/music-O-App/static/js/453.dcd9a741.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc8c17bd.css",
-    "static/js/main.0a030aa4.js"
+    "static/css/main.a4e97ec7.css",
+    "static/js/main.a4d1eb0e.js"
   ]
 }
