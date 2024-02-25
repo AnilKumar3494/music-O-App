@@ -15,11 +15,16 @@ const Podcast = ({ podcastsArray, currentPlaying, setCurrentPlaying, setIsPlayin
     return (
         <div className="playlist_entry">
             {podcastsArray.map((podcast, podcastIndex) => (
+
                 <div className="playlists_container" key={podcastIndex}>
-                    <div className="playlist_bar" onDoubleClick={() => handleDoubleClick(podcast)} title="Double Click to Play" style={{
-                        borderColor: podcastIndex % 2 !== 0 && 'white',
-                        border: podcast === currentPlaying && '1px solid red'
-                    }}>
+                    <div
+                        className="playlist_bar"
+                        onDoubleClick={() => handleDoubleClick(podcast)}
+                        title="Double Click to Play"
+                        style={{
+                            borderColor: podcastIndex % 2 === 0 && 'aliceblue',
+                            borderColor: currentPlaying === podcast && 'red'
+                        }}>
                         <div className="podcast_detail">
                             <span className='play_title'>{podcast.episodeTitle}</span>
                             <span>
@@ -32,11 +37,11 @@ const Podcast = ({ podcastsArray, currentPlaying, setCurrentPlaying, setIsPlayin
                                             : 'NA'}
                             </span>
                         </div>
-                        <a className="play_btn" onClick={() => handlePlay(podcast)} title="Click to Play"
+                        <a className="play_btn"
+                            onClick={() => handlePlay(podcast)}
+                            title="Click to Play"
                             style={{ color: podcast === currentPlaying && 'green' }}
-
-                        >{podcast === currentPlaying ? 'Playing' : 'Play'}
-                        </a>
+                        >{podcast === currentPlaying ? 'Playing' : 'Play'}</a>
                     </div>
                 </div>
             ))}

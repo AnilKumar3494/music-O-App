@@ -19,9 +19,10 @@ const Song = ({ songsArray, currentPlaying, setCurrentPlaying, setIsPlaying }) =
                 <div className="playlists_container" key={songIndex}>
                     <div className="playlist_bar" onDoubleClick={() => handleDoubleClick(song)} title="Double Click to Play"
                         style={{
-                            borderColor: songIndex % 2 === 0 && 'white',
-                            border: song === currentPlaying && '1px solid red'
+                            borderColor: songIndex % 2 === 0 && 'aliceblue',
+                            borderColor: currentPlaying === song && 'red'
                         }}>
+
                         <div className="song_detail">
                             <span className='play_title'>{song.title}</span>
                             <span>{song.artist}</span>
