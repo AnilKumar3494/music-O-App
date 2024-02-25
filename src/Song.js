@@ -23,7 +23,7 @@ const Song = ({ songsArray, currentPlaying, setCurrentPlaying, setIsPlaying }) =
                             border: song === currentPlaying && '1px solid red'
                         }}>
                         <div className="song_detail">
-                            <span>{song.title}</span>
+                            <span className='play_title'>{song.title}</span>
                             <span>{song.artist}</span>
                             <span>{song.year}</span>
                         </div>

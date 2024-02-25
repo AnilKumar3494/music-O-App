@@ -21,7 +21,7 @@ const Podcast = ({ podcastsArray, currentPlaying, setCurrentPlaying, setIsPlayin
                         border: podcast === currentPlaying && '1px solid red'
                     }}>
                         <div className="podcast_detail">
-                            <span>{podcast.episodeTitle}</span>
+                            <span className='play_title'>{podcast.episodeTitle}</span>
                             <span>
                                 {podcast.season && podcast.episode
                                     ? `Season: ${podcast.season}, Episode: ${podcast.episode}`
