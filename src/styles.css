@@ -202,7 +202,7 @@ button:hover {
     padding: 0.3rem 0.6rem;
   }
   .current_song {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .song_detail,
