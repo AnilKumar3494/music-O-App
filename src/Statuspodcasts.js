@@ -18,15 +18,13 @@ const Statuspodcasts = ({ currentPlaying, isPlaying, playNext, playPrev, playPau
                         </span>
                     )}
                 </p>
-
-
             )}
             <div className='buttons_container'>
-                <button className='play_pause_btn' onClick={playPause}>{isPlaying ? 'Pause' : 'Play'}</button>
+                <button className='play_pause_btn' onClick={playPause} title={isPlaying ? 'Pause' : 'Play'}>{isPlaying ? 'Pause' : 'Play'}</button>
 
-                <button className='prev_btn' onClick={playPrev}>Previous</button>
-                <button className='shuffle_btn' onClick={shuffled}>Shuffle</button>
-                <button className='next_btn' onClick={playNext}>Next</button>
+                <button className='prev_btn' onClick={playPrev} title='Previous'>Previous</button>
+                <button className='shuffle_btn' onClick={shuffled} title='Shuffle'>Shuffle</button>
+                <button className='next_btn' onClick={playNext} title='Next'>Next</button>
             </div>
         </div>
     );

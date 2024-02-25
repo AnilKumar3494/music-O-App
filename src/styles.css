@@ -160,3 +160,31 @@ button:hover {
   background: radial-gradient(circle, #bd8c41, #ff6600, #ff3300);
   color: black;
 }
+
+@media (max-width: 450px) {
+  body {
+    margin: 0;
+    margin-inline: 1rem;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  .songs_container h2,
+  .podcasts_container h2 {
+    font-size: 1rem;
+  }
+  .song_detail span,
+  .podcast_detail span,
+  .play_btn,
+  button {
+    font-size: 0.8rem;
+  }
+  .current_song {
+    font-size: 1rem;
+  }
+
+  .song_detail,
+  .podcast_detail {
+    width: 75%;
+  }
+}

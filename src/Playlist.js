@@ -27,16 +27,21 @@ export default function Playlist() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                //Fetching data from server - GitHub
                 const response = await fetch('https://anilkumar3494.github.io/host-json/myTracks.json');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const data = await response.json();
 
+                //Assigning data yo use
+                const data = await response.json();
                 const tracks = data.tracks;
+
+                //seperating songs and podcasts from tracks
                 const songs = tracks.filter(item => item.artist && item.year);
                 const podcasts = tracks.filter(item => (item.episodeTitle || item.episode));
 
+                //shuffle only on shuffle button clicked
                 if (!initialized) {
                     const shuffledSongs = shuffleArray(songs);
                     const shuffledPodcasts = shuffleArray(podcasts);
@@ -117,7 +122,7 @@ export default function Playlist() {
 
 
     //Play Pause
-    const playPause = () => {
+    const playPauseSong = () => {
         if (currentPlayingSong === null) {
             const randomIndex = Math.floor(Math.random() * songs.length);
             setCurrentPlayingSong(songs[randomIndex]);
@@ -160,11 +165,11 @@ export default function Playlist() {
                     isPlaying={isPlaying}
                     playNext={playNextSong}
                     playPrev={playPrevSong}
-                    playPause={playPause}
+                    playPause={playPauseSong}
                     shuffled={shuffleSongs}
                 />
                 <div className="songs_box">
-                    <Song songsArray={songs} setCurrentPlaying={setCurrentPlayingSong} setIsPlaying={setIsPlaying} />
+                    <Song songsArray={songs} currentPlaying={currentPlayingSong} setCurrentPlaying={setCurrentPlayingSong} setIsPlaying={setIsPlaying} />
                 </div>
             </div>
 
@@ -181,7 +186,7 @@ export default function Playlist() {
                     shuffled={shufflePodcasts}
                 />
                 <div className="podcasts_box">
-                    <Podcast podcastsArray={podcasts} setCurrentPlaying={setCurrentPlayingPodcast} setIsPlaying={setIsPlaying} />
+                    <Podcast podcastsArray={podcasts} currentPlaying={currentPlayingPodcast} setCurrentPlaying={setCurrentPlayingPodcast} setIsPlaying={setIsPlaying} />
                 </div>
             </div>
         </div>
