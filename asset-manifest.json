@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/music-O-App/static/css/main.aebea087.css",
-    "main.js": "/music-O-App/static/js/main.0c5aeaf1.js",
+    "main.js": "/music-O-App/static/js/main.6935dbc0.js",
     "static/js/453.dcd9a741.chunk.js": "/music-O-App/static/js/453.dcd9a741.chunk.js",
     "static/media/musicbg.jpg": "/music-O-App/static/media/musicbg.f4931b92f08dc7233385.jpg",
     "index.html": "/music-O-App/index.html",
     "main.aebea087.css.map": "/music-O-App/static/css/main.aebea087.css.map",
-    "main.0c5aeaf1.js.map": "/music-O-App/static/js/main.0c5aeaf1.js.map",
+    "main.6935dbc0.js.map": "/music-O-App/static/js/main.6935dbc0.js.map",
     "453.dcd9a741.chunk.js.map": "/music-O-App/static/js/453.dcd9a741.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.aebea087.css",
-    "static/js/main.0c5aeaf1.js"
+    "static/js/main.6935dbc0.js"
   ]
 }
