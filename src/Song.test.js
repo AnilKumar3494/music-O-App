@@ -30,8 +30,6 @@ describe('Song component', () => {
         expect(getByText('2021')).toBeInTheDocument();
     });
 
-
-
     test('double clicking song triggers handleDoubleClick', () => {
         const { getByText } = render(
             <Song

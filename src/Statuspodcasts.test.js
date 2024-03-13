@@ -11,7 +11,6 @@ test('renders Statuspodcasts component correctly', () => {
     expect(getByText('Next')).toBeInTheDocument();
 });
 
-
 test('triggers playPause function when play/pause button is clicked', () => {
     const playPauseMock = jest.fn();
     const { getByText } = render(<Statuspodcasts isPlaying={false} playPause={playPauseMock} />);

@@ -5,15 +5,12 @@ import reportWebVitals from './reportWebVitals';
 
 import Playlist from './Playlist';
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <div>
+    <main>
       <Playlist />
-    </div>
-
+    </main>
   </React.StrictMode>
 );
 
